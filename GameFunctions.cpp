@@ -55,6 +55,8 @@ int displayGuessPrompt()
 	);
 	int playerGuess{};
 
+	// Ensures that an int is entered, then checks if the input is between MIN_VALUE and MAX_VALUE.
+	// If any of these conditions is incorrect, an error message is outputted and the prompt repeats.
 	while (std::cout << guessPromptMessage && !(std::cin >> playerGuess)
 		|| playerGuess < MIN_VALUE || playerGuess > MAX_VALUE)
 	{
@@ -74,15 +76,15 @@ bool displayReplayPrompt()
 	std::string replayPromptMessage = "Do you wish to play again? (Y/n) ";
 	char playerInput{};
 
+	// Ensures that a char is entered, then checks if the input is 'y' or 'n'.
+	// If any of these conditions is incorrect, an error message is outputted and the prompt repeats.
 	while (std::cout << replayPromptMessage && !(std::cin >> playerInput)
 		|| !(tolower(playerInput) == 'y') && !(tolower(playerInput) == 'n'))
 	{
 		std::cin.clear();
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
-		std::cout << std::format(
-			"Invalid input. please enter a number between {} and {}.\n", MIN_VALUE, MAX_VALUE
-		);
+		std::cout << "Invalid input. please enter either 'Y' or 'n'.\n";
 	}
 
 	return tolower(playerInput) == 'y';
